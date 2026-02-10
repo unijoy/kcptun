@@ -23,6 +23,7 @@ jobs:
       - name: Build Binaries
         run: |
           # 1. Create a clean directory for release artifacts
+          echo "Creating release directory..."
           mkdir -p release
 
           # 2. Get the version tag
@@ -45,14 +46,14 @@ jobs:
             -o release/client \
             ./client
 
-          # 5. DEBUG: List all files to confirm location (Check this step in logs if it fails!)
+          # 5. DEBUG: This will show us exactly what is in the folder
           echo "=== Content of release directory ==="
           ls -R release/
 
       - name: Upload Binaries to Release
         uses: softprops/action-gh-release@v1
         with:
-          # Upload everything in the release folder
+          # This wildcard is the key fix. It grabs everything in the folder.
           files: release/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
