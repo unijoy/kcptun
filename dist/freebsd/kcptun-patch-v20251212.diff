@@ -11,7 +11,7 @@ index 000000000000..0c2293a176e3
 +
 +MAINTAINER=	imap@live.com
 +COMMENT=	Quantum-safe UDP tunnel using QPP, KCP, FEC and multiplexing
-+WWW=		https://github.com/xtaci/kcptun
++WWW=		https://github.com/unijoy/kcptun
 +
 +LICENSE=	MIT
 +LICENSE_FILE=	${WRKSRC}/LICENSE.md

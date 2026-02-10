@@ -111,12 +111,12 @@ which relays the original connection:
 
 > Application -> Target Server(9000/tcp) 
 
-**_OR START WITH THESE COMPLETE CONFIGURATION FILES:_** [client](https://github.com/xtaci/kcptun/blob/master/dist/local.json.example) --> [server](https://github.com/xtaci/kcptun/blob/master/dist/server.json.example)
+**_OR START WITH THESE COMPLETE CONFIGURATION FILES:_** [client](https://github.com/unijoy/kcptun/blob/master/dist/local.json.example) --> [server](https://github.com/unijoy/kcptun/blob/master/dist/server.json.example)
 
 ## Building from source
 
 ```
-$ git clone https://github.com/xtaci/kcptun.git
+$ git clone https://github.com/unijoy/kcptun.git
 $ cd kcptun
 $ ./build-release.sh
 $ cd build
