@@ -22,28 +22,36 @@ jobs:
 
       - name: Build Binaries
         run: |
-          # Use the Release Tag (e.g., v1.0.0) as the version
+          # 1. Create a specific directory for artifacts
+          mkdir dist
+
+          # 2. Get the version tag
           VERSION=${{ github.ref_name }}
           
           echo "Building Server..."
+          # We explicitly output to dist/server
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
             -mod=vendor \
             -ldflags "-X main.VERSION=$VERSION -s -w" \
-            -o server \
+            -o dist/server \
             ./server
 
           echo "Building Client..."
+          # We explicitly output to dist/client
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
             -mod=vendor \
             -ldflags "-X main.VERSION=$VERSION -s -w" \
-            -o client \
+            -o dist/client \
             ./client
+
+          # 3. Debug: List files to ensure they exist (Check your Action logs if this fails)
+          echo "Listing dist directory:"
+          ls -la dist/
 
       - name: Upload Binaries to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            server
-            client
+          # We simply upload everything inside the dist folder
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
