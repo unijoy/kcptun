@@ -22,36 +22,37 @@ jobs:
 
       - name: Build Binaries
         run: |
-          # 1. Create a specific directory for artifacts
-          mkdir dist
+          # 1. Create a clean directory for release artifacts
+          mkdir -p release
 
           # 2. Get the version tag
           VERSION=${{ github.ref_name }}
-          
+          echo "Building version: $VERSION"
+
+          # 3. Build Server -> Output to release/server
           echo "Building Server..."
-          # We explicitly output to dist/server
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
             -mod=vendor \
             -ldflags "-X main.VERSION=$VERSION -s -w" \
-            -o dist/server \
+            -o release/server \
             ./server
 
+          # 4. Build Client -> Output to release/client
           echo "Building Client..."
-          # We explicitly output to dist/client
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
             -mod=vendor \
             -ldflags "-X main.VERSION=$VERSION -s -w" \
-            -o dist/client \
+            -o release/client \
             ./client
 
-          # 3. Debug: List files to ensure they exist (Check your Action logs if this fails)
-          echo "Listing dist directory:"
-          ls -la dist/
+          # 5. DEBUG: List all files to confirm location (Check this step in logs if it fails!)
+          echo "=== Content of release directory ==="
+          ls -R release/
 
       - name: Upload Binaries to Release
         uses: softprops/action-gh-release@v1
         with:
-          # We simply upload everything inside the dist folder
-          files: dist/*
+          # Upload everything in the release folder
+          files: release/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
