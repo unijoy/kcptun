@@ -30,8 +30,8 @@ TARGETS=(
 )
 
 # Full Go package import paths
-CLIENT_SRC="github.com/xtaci/kcptun/client"
-SERVER_SRC="github.com/xtaci/kcptun/server"
+CLIENT_SRC="github.com/unijoy/kcptun/client"
+SERVER_SRC="github.com/unijoy/kcptun/server"
 
 # Build output directory
 BUILD_DIR="$(pwd)/build"

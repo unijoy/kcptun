@@ -36,8 +36,8 @@ A Stable & Secure Tunnel based on KCP with N:M multiplexing and FEC
 
 %build
 LDFLAGS='-s -w -linkmode=external -extldflags -static -X main.VERSION=%{version}'
-go build -ldflags "$LDFLAGS" -o %{name}-server github.com/xtaci/kcptun/server
-go build -ldflags "$LDFLAGS" -o %{name}-client github.com/xtaci/kcptun/client
+go build -ldflags "$LDFLAGS" -o %{name}-server github.com/unijoy/kcptun/server
+go build -ldflags "$LDFLAGS" -o %{name}-client github.com/unijoy/kcptun/client
 
 %install
 rm -rf $RPM_BUILD_ROOT
